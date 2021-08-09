@@ -46,6 +46,18 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+            'hash' => false,
+        ],
+
+        'author' => [
+            'driver' => 'session',
+            'provider' => 'authors',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +81,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
+        'authors' => [
+            'driver' => 'eloquent',
+            'model' => App\Author::class,
         ],
 
         // 'users' => [
