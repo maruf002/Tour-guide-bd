@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', 'IndexController@index')->name('index');
 
 Auth::routes();
 
@@ -32,8 +32,19 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('reg
 Route::post('/register/author', 'Auth\RegisterController@createAuthor')->name('register.author');
 
 // Route::view('/home', 'home')->middleware('auth');
-Route::group(['middleware' => 'auth'], function () {
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::view('/home', 'home');
+// });
+Route::group(['as' => 'user.', 'prefix' => 'user',  'middleware' => ['auth', 'user']], function () {
     Route::view('/home', 'home');
+    Route::post('add-cart', 'ProductsController@addtoCart')->name('addtoCart');
+    Route::get('cart', 'ProductsController@cart')->name('cart');
+    Route::get('delete-cart/{id}', 'ProductsController@deleteCart')->name('deleteCart');
+    Route::get('updateCart/{id}/{q}', 'ProductsController@updateCart')->name('updateCart');
+    Route::Post('apply-coupon', 'ProductsController@applyCoupon')->name('applyCoupon');
+    Route::match(['get', 'post'], '/checkout', 'ProductsController@checkout')->name('checkout');
+    
+ 
 });
 Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');
