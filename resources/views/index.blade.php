@@ -90,35 +90,27 @@
 	<section class="search-sec">
 	
 		<div class="container">
-			<form action="#" method="post" novalidate="novalidate">
+			<form action="{{route('search')}}" method="get" novalidate="novalidate">
 				<div class="row">
 					<div class="col-lg-8 offset-3">
 						<div class="row">
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<select class="form-control search-slt" id="exampleFormControlSelect1">
+								<select name="Division" class="form-control search-slt" id="exampleFormControlSelect1">
 									<option>বিভাগ বাছাই করুন</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
+									@foreach ($divisions as $div)
+									<option value="{{$div->id}}">{{$div->bn_name}}</option>
+									@endforeach
 								</select>
 							</div>
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<select class="form-control search-slt" id="exampleFormControlSelect1">
+								<select name="District" class="form-control search-slt" id="exampleFormControlSelect1">
 									<option>জেলা বাছাই করুন
 									</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
-									<option>Example one</option>
+								
 								</select>
 							</div>
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<button type="button" class="btn btn-danger wrn-btn">Search</button>
+								<button type="submit" class="btn btn-danger wrn-btn">Search</button>
 							</div>
 						</div>
 					</div>
@@ -128,4 +120,32 @@
 	</section>
 	
 </div>
+
+@push('js')
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('select[name="Division"]').on('change', function() {
+		
+			var DivisionId = $(this).val();
+			if(DivisionId) {
+				$.ajax({
+					url: '/myform/ajax/'+DivisionId,
+					type: "GET",
+					dataType: "json",
+					success:function(data){
+						console.log(data);
+						$('select[name="District"]').empty();
+						$.each(data, function(key, value) {
+							// $('select[name="District"]').append('<option value="'+ value +'">'+ value +'</option>'); // if we need only value
+							$('select[name="District"]').append('<option value="'+ key +'">'+ value +'</option>');
+						});
+					}
+				});
+			}else{
+				$('select[name="District"]').empty();
+			}
+		});
+	});
+</script>
+@endpush
 @endsection

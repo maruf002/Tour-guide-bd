@@ -44,7 +44,7 @@
 	<script src="{{ ("assets/frontend/common-js/bootstrap.js") }}"></script>
 	<script src="{{ ("assets/frontend/common-js/scripts.js") }}"></script>
   
-
+    @stack('js')
 	 
 </body>
 </html>

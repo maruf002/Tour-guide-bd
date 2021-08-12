@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'IndexController@index')->name('index');
-
+Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));
+Route::get('/search', [IndexController::class, 'search'])->name('search');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
