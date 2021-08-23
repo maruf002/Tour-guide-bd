@@ -33,26 +33,20 @@ Route::post('/login/author', 'Auth\LoginController@authorLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('register.admin');
 Route::post('/register/author', 'Auth\RegisterController@createAuthor')->name('register.author');
 
-// Route::view('/home', 'home')->middleware('auth');
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::view('/home', 'home');
-// });
-Route::group(['as' => 'user.', 'prefix' => 'user',  'middleware' => ['auth', 'user']], function () {
-    Route::view('/home', 'home');
-    Route::post('add-cart', 'ProductsController@addtoCart')->name('addtoCart');
-    Route::get('cart', 'ProductsController@cart')->name('cart');
-    Route::get('delete-cart/{id}', 'ProductsController@deleteCart')->name('deleteCart');
-    Route::get('updateCart/{id}/{q}', 'ProductsController@updateCart')->name('updateCart');
-    Route::Post('apply-coupon', 'ProductsController@applyCoupon')->name('applyCoupon');
-    Route::match(['get', 'post'], '/checkout', 'ProductsController@checkout')->name('checkout');
-    
- 
-});
-Route::group(['middleware' => 'auth:admin'], function () {
-    Route::view('/admin', 'admin');
+
+Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin','middleware'=>['auth:admin']],function(){
+	
+	Route::get('dashboard','DashboardController@index')->name('dashboard');
+	
+
 });
 
-Route::group(['middleware' => 'auth:author'], function () {
-    Route::view('/author', 'author');
+
+Route::group(['as'=>'author.', 'prefix'=>'author', 'namespace'=>'Author','middleware'=>['auth']],function(){
+	
+	Route::get('dashboard','DashboardController@index')->name('dashboard');
+	
+
 });
+
 

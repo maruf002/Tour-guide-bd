@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\district;
 use App\division;
+use App\place;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,8 +28,11 @@ class IndexController extends Controller
     }
 
 
-    public function search(Request $request){
-        return $request;
+    // public function search(Request $request){
+    //      $request;
+    //     $district = $request->District;
+    //     $division = $request->Division;
+    //   return $d = place::where('divsion_id', $division AND 'district_id', $district)->get();
 
-    }
+    // }
 }
