@@ -37,4 +37,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
+    public function places(){
+        return $this->hasMany('App\Place');
+    }
+
 }

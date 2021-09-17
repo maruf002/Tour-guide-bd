@@ -17,11 +17,10 @@ class IndexController extends Controller
 
     public function myformAjax($DivisionId)
     {
-
-      
+           
       $id=division::select('id')->where("id", $DivisionId)->first();
    
-       return $citys = district::where('division_id',$id['id'])->pluck("bn_name","id");
+    return $citys = district::where('division_id',$id['id'])->pluck("bn_name","id");
 
     
         return json_encode($citys);

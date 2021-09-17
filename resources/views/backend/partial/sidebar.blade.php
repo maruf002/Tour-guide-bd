@@ -49,23 +49,10 @@
                 </li>
 
 
-              <li class="">
-                <a href="">
-                        <i class="material-icons">label</i>
-                        <span>Tag</span>
-                    </a>
-                </li>
-
-                <li class="">
-                    <a href="">
-                            <i class="material-icons">label</i>
-                            <span>category</span>
-                        </a>
-                    </li> 
 
 
               <li class="{{Request::is('admin/post*') ? 'active' : ''}}">
-                <a href="">
+                <a href="{{route('admin.post.index')}}">
                         <i class="material-icons">library_books</i>
                         <span>Posts</span>
                     </a>
@@ -73,8 +60,8 @@
 
              
                 
-                <li class="">
-                        <a href="">
+                <li class="{{Request::is('admin/pending/post') ? 'active' : ''}}">
+                        <a href="{{ route('admin.post.pending')}}">
                                 <i class="material-icons">pending</i>
                                 <span>Pending Posts</span>
                          </a>
@@ -116,32 +103,20 @@
             </li>
 
             <li class="{{Request::is('author/post*') ? 'active' : ''}}">
-                <a href="">
+                <a href="{{ route('author.post.index')}}">
                         <i class="material-icons">library_books</i>
                         <span>Posts</span>
                     </a>
             </li>
 
-            <li class="{{Request::is('author/favourite') ? 'active' : ''}}">
-                <a href="">
-                        <i class="material-icons">favorite</i>
-                        <span>Favourite Posts</span>
-                 </a>
-                </li>
-
-                <li class="{{Request::is('author/comments') ? 'active' : ''}}">
-                    <a href="">
-                            <i class="material-icons">comment</i>
-                            <span>Comments</span>
-                     </a>
-                    </li>   
-
+    
+{{-- 
             <li class="{{Request::is('author/settings') ? 'active' : ''}}">
                 <a href="">
                         <i class="material-icons">settings</i>
                         <span>Settings</span>
                     </a>
-            </li>
+            </li> --}}
 
 
               <li class="header">System</li>

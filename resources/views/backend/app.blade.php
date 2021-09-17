@@ -87,11 +87,13 @@
     <section class="content">
        @yield('content')
     </section>
-
+   
+<
 
 	<!-- SCIPTS -->
 	 <!-- Jquery Core Js -->
 	 <script src="{{asset('assets/backend/plugins/jquery/jquery.min.js')}}"></script>
+
 
 	 <!-- Bootstrap Core Js -->
 	 <script src="{{asset('assets/backend/plugins/bootstrap/js/bootstrap.js')}}"></script>
@@ -114,7 +116,7 @@
      
      <script src="{{asset('assets/backend/js/demo.js')}}"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-     {{-- {!! Toastr::message() !!}
+    {!! Toastr::message() !!}
 
      <script>
          @if($errors->any())
@@ -128,7 +130,7 @@
          @endforeach
 
          @endif
-     </script> --}}
+     </script>
 
 
     

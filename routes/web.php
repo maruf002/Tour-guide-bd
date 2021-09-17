@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'IndexController@index')->name('index');
+// Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));
 Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 Auth::routes();
@@ -37,7 +38,10 @@ Route::post('/register/author', 'Auth\RegisterController@createAuthor')->name('r
 Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin','middleware'=>['auth:admin']],function(){
 	
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
-	
+	Route::resource('post','PostController');
+	Route::get('/pending/post','PostController@pending')->name('post.pending');
+	Route::put('/post/{id}/approve','PostController@approval')->name('post.approve');
+
 
 });
 
@@ -45,6 +49,8 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin','middlewar
 Route::group(['as'=>'author.', 'prefix'=>'author', 'namespace'=>'Author','middleware'=>['auth']],function(){
 	
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
+	Route::resource('post','PostController');
+	
 	
 
 });
