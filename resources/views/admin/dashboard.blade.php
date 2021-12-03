@@ -21,7 +21,7 @@
                 </div>
                 <div class="content">
                     <div class="text">TOTAL POSTS</div>
-                    <div class="number count-to" data-from="0" data-to="" data-speed="15" data-fresh-interval="20"></div>
+                    <div>{{$total_post}}</div>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="content">
                     <div class="text">TOTAL PENDING POSTS</div>
-                    <div class="number count-to" data-from="0" data-to="" data-speed="1000" data-fresh-interval="20"></div>
+                    <div>{{$pending}}</div>
                 </div>
             </div>
         </div>
@@ -43,14 +43,13 @@
     </div>
 
 
- 
 
     <div class="row clearfix">
         <!-- Task Info -->
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <div class="card">
                 <div class="header">
-                    <h2>TOP TEN ACTIVE AUTHOR</h2>
+                    <h2> AUTHOR</h2>
                    
                 </div>
                 <div class="body">
@@ -58,22 +57,42 @@
                         <table class="table table-hover dashboard-task-infos">
                             <thead>
                                 <tr>
-                                    <th>RANK LIST</th>
-                                    <th>NAME</th>
-                                    <th>POSTS</th>
-                                    <th>COMMENTS</th>
-                                    <th>FAVOURITE</th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>email</th>
+                                    <th>Join date</th>
+                                    <th>Action</th>
+                              
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @foreach ($user as $us)
+                                    
+                              
                         
                                     <tr>
                                  
-                                    <td>gg</td>
-                                    <td>1</td>
+                                    <td>{{$us->id}}</td>
+                                    <td>{{$us->name}}</td>
+                                    <td>{{$us->email}}</td>
+                                    <td>{{$us->created_at}}</td>
+                                    <td>
+                                        <button class="btn btn-danger waves-effect" type="button"
+                                        onclick="deleteproduct({{ $us->id }})">
+                                        delete
+                                    </button>
+                                    <form id="delete-form-{{ $us->id }}"
+                                        action="{{ route('admin.user.delete', $us->id) }}"
+                                        method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    </td>
+                                    
                                           
                                     </tr>
-                             
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -88,6 +107,42 @@
 @endsection
 
 @push('js')
+
+    <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+
+    <script type="text/javascript">
+        function deleteproduct(id) {
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById('delete-form-' + id).submit();
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    swal(
+                        'Cancelled',
+                        'Your data is safe :)',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
+
 
 <!-- Jquery CountTo Plugin Js -->
 <script src="{{asset('assets/backend/plugins/jquery-countto/jquery.countTo.js')}}"></script>

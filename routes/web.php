@@ -38,6 +38,7 @@ Route::post('/register/author', 'Auth\RegisterController@createAuthor')->name('r
 Route::group(['as'=>'admin.', 'prefix'=>'admin', 'namespace'=>'Admin','middleware'=>['auth:admin']],function(){
 	
 	Route::get('dashboard','DashboardController@index')->name('dashboard');
+	Route::delete('/delete/user/{id}/','DashboardController@destroy')->name('user.delete');
 	Route::resource('post','PostController');
 	Route::get('/pending/post','PostController@pending')->name('post.pending');
 	Route::put('/post/{id}/approve','PostController@approval')->name('post.approve');

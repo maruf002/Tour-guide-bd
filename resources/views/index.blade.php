@@ -34,7 +34,7 @@
 @media (min-width: 992px){
     .search-sec{
         position: relative;
-        top: -114px;
+        /* top: -114px; */
         background: rgba(26, 70, 104, 0.51);
     }
 }
