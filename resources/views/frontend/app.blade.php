@@ -35,9 +35,12 @@
     @yield('content')
 
 
+    @if(Request::is('/'))
+    
+
     @include('frontend.partial.footer')
 
-
+    @endif
    
 	<script src="{{ ("assets/frontend/common-js/jquery-3.1.1.min.js") }}"></script>
 	<script src="{{ ("assets/frontend/common-js/tether.min.js") }}"></script>

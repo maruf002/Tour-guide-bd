@@ -56,7 +56,7 @@ class PostController extends Controller
 
 
         $image = $request->file('image');
-        $slug  = $request->title;
+        $slug  = 555;
         if (isset($image)) {
             //make unique name for image
             $currentDate = carbon::now()->toDatestring();
@@ -138,7 +138,7 @@ class PostController extends Controller
         $place = place::find($id);
 
         $image = $request->file('image');
-        $slug  = $request->title;
+        $slug  = 555;
         if (isset($image)) {
             $place = place::find($id);
             //make unique name for image
