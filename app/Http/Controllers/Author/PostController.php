@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\PlaceImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
@@ -23,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $places = place::where('user_id',Auth::id())->get();
+        $places = place::where('user_id', Auth::id())->get();
         return view('author.post.index', compact('places'));
     }
 
@@ -46,8 +47,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'title' => 'required|max:255',
+            'title' => 'required|unique:places',
             'Division' => 'required',
             'District' => 'required',
             'image'     => 'required',
@@ -79,6 +81,34 @@ class PostController extends Controller
         $place->divsion_id   = $request->Division;
         $place->description    = $request->body;
         $place->save();
+
+        $files = $request->file('photos');
+
+        foreach ($files as $key => $image) {
+            // $request->moreimage;
+
+            $slug  = 555;
+            if (isset($image)) {
+                //make unique name for image
+                $currentDate = carbon::now()->toDatestring();
+                $imageName   = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+                if (!storage::disk('public')->exists('photos')) {
+                    storage::disk('public')->makeDirectory('photos');
+                }
+                $postImage = Image::make($image)->stream();
+                storage::disk('public')->put('photos/' . $imageName, $postImage);
+            } else {
+                $image = "default.png";
+            }
+
+            $image = new PlaceImage();
+
+            $image->user_id = Auth::id(); //auth::id()= present authinticated id
+            $image->place_id   = $place->id;
+            $image->photos   = $imageName;
+            $image->save();
+        }
+
         Toastr::success('post successfully saved', 'success');
         return redirect()->back();
     }
@@ -92,12 +122,11 @@ class PostController extends Controller
     public function show($id)
     {
         $post = place::find($id);
-        if($post->user_id != Auth::id()){
-            Toastr::error('you are not authorized to access this post','Error');
+        if ($post->user_id != Auth::id()) {
+            Toastr::error('you are not authorized to access this post', 'Error');
             return redirect()->back();
-
         }
-        return view('author.post.show',compact('post'));
+        return view('author.post.show', compact('post'));
     }
 
     /**
@@ -126,15 +155,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-         
-       // $request->validate([
+
+        // $request->validate([
         // 	'title' => 'required|max:255',
         // 	'Division' => 'required',
         // 	'District' => 'required',
         //     'body'=>'required', 
         // ]);
 
-        
+
         $place = place::find($id);
 
         $image = $request->file('image');
@@ -157,7 +186,7 @@ class PostController extends Controller
 
             $postImage = Image::make($image)->stream();
             storage::disk('public')->put('post/' . $imageName, $postImage);
-        }else{
+        } else {
             $imageName = $place->image;
         }
 
@@ -168,8 +197,54 @@ class PostController extends Controller
         $place->divsion_id   = $request->Division;
         $place->description    = $request->body;
         $place->save();
-         Toastr::success('post successfully updated','success');
-         return redirect()->back();
+
+
+
+        $files = $request->file('photos');
+
+        if (isset($files)) {
+            $place = PlaceImage::where('place_id', $id)->get();
+              //delete old post image
+              foreach ($place as $key => $pl) {
+                # code...
+
+                if (storage::disk('public')->exists('photos/' . $pl->photos)) {
+
+                    storage::disk('public')->delete('photos/' . $pl->photos);
+                }
+            }
+
+            $place = PlaceImage::where('place_id', $id)->delete();
+
+            foreach ($files as $key => $image) {
+                // $request->moreimage;
+               
+                $slug  = 555;
+                if (isset($image)) {
+                    //make unique name for image
+                    $currentDate = carbon::now()->toDatestring();
+                    $imageName   = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+                    if (!storage::disk('public')->exists('photos')) {
+                        storage::disk('public')->makeDirectory('photos');
+                    }
+
+                  
+
+                    $postImage = Image::make($image)->stream();
+                    storage::disk('public')->put('photos/' . $imageName, $postImage);
+                } 
+
+                $image = new PlaceImage();
+
+                $image->user_id = Auth::id(); //auth::id()= present authinticated id
+                $image->place_id   = $id;
+                $image->photos   = $imageName;
+                $image->save();
+            }
+        }
+
+        Toastr::success('post successfully updated', 'success');
+        return redirect()->back();
     }
 
     /**
@@ -189,5 +264,4 @@ class PostController extends Controller
         Toastr::success('post successfully deleted', 'success');
         return redirect()->back();
     }
-    
 }

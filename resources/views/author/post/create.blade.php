@@ -36,7 +36,12 @@
 
                     <div class="form-group">
                         <label for="image">Image</label>
-                        <input type="file" name="image">
+                        <input type="file" class="form-control" name="image" >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Multiple Image</label>
+                        <input type="file" class="form-control" name="photos[]" multiple />
                     </div>
                    
 
