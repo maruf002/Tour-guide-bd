@@ -88,7 +88,7 @@
                       <div class="mb-1 text-muted small"> {{$pl->created_at->diffforhumans()}}</div>
                       <p class="card-text mb-auto">  {{Str::limit( strip_tags($pl->description,150)) }} 
                     </p>
-                      <a class="btn btn-sm" role="button" href="http://www.jquery2dotnet.com/">Continue reading</a>
+                      <a class="btn btn-sm" role="button" href="{{route('place.detailes',$pl->id)}}">Continue reading</a>
                    </div>
                    <img class="crd-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="{{asset('storage/post/'.$pl->image)}}" style="width: 350px; height: 280px;">
              

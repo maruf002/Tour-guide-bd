@@ -31,7 +31,23 @@
                         <div class="form-line">
                             <input type="text" id="title" class="form-control" name="title">
                             <label class="form-label" >Post Title</label>
-                        </div>
+                        
+                        </div><br>
+                       
+                        <div class="form-line">
+                            <input type="text" id="title" class="form-control" name="going">
+                            <label class="form-label" > যেভাবে যাবেন</label>
+                        </div><br>
+
+                        <div class="form-line">
+                            <input type="text" id="title" class="form-control" name="eat">
+                            <label class="form-label" > কোথায় খাবেন</label>
+                        </div><br>
+
+                        <div class="form-line">
+                            <input type="text" id="title" class="form-control" name="stay">
+                            <label class="form-label" > কোথায় থাকবেন  </label>
+                        </div><br>
                     </div>
 
                     <div class="form-group">

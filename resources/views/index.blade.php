@@ -64,13 +64,16 @@
 		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="https://pbs.twimg.com/media/EGHYvttU4AAYKb7?format=jpg&name=large" class="d-block w-100" alt="...">
+					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 500px" >
 				</div>
 				<div class="carousel-item">
-					<img src="https://pbs.twimg.com/media/EGHYvtkUcAAuc8T?format=jpg&name=large" class="d-block w-100" alt="...">
+					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
 				</div>
 				<div class="carousel-item">
-					<img src="https://pbs.twimg.com/media/EGHYvtjU0AAO8w1?format=jpg&name=large" class="d-block w-100" alt="...">
+					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
+				</div>
+				<div class="carousel-item">
+					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
 				</div>
 				<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
 			</div>

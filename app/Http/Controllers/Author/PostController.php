@@ -54,6 +54,9 @@ class PostController extends Controller
             'District' => 'required',
             'image'     => 'required',
             'body' => 'required',
+            'going' => 'required',
+            'stay' => 'required',
+            'eat' => 'required',
         ]);
 
 
@@ -80,6 +83,9 @@ class PostController extends Controller
         $place->district_id   = $request->District;
         $place->divsion_id   = $request->Division;
         $place->description    = $request->body;
+        $place->going    = $request->going;
+        $place->eat    = $request->eat;
+        $place->stay    = $request->stay;
         $place->save();
 
         $files = $request->file('photos');
@@ -142,7 +148,7 @@ class PostController extends Controller
         $s_division = $place->divsion_id;
         $s_district = $place->district_id;
 
-        $dv = DB::table('divisions')->where('id', $s_division)->get();
+       $dv = DB::table('divisions')->where('id', $s_division)->pluck('id')->first();
         return view('author.post.edit', compact('place', 'divisions', 'dv'));
     }
 
@@ -196,6 +202,9 @@ class PostController extends Controller
         $place->district_id   = $request->District;
         $place->divsion_id   = $request->Division;
         $place->description    = $request->body;
+        $place->going    = $request->going;
+        $place->eat    = $request->eat;
+        $place->stay    = $request->stay;
         $place->save();
 
 
@@ -204,8 +213,8 @@ class PostController extends Controller
 
         if (isset($files)) {
             $place = PlaceImage::where('place_id', $id)->get();
-              //delete old post image
-              foreach ($place as $key => $pl) {
+            //delete old post image
+            foreach ($place as $key => $pl) {
                 # code...
 
                 if (storage::disk('public')->exists('photos/' . $pl->photos)) {
@@ -218,7 +227,7 @@ class PostController extends Controller
 
             foreach ($files as $key => $image) {
                 // $request->moreimage;
-               
+
                 $slug  = 555;
                 if (isset($image)) {
                     //make unique name for image
@@ -228,11 +237,11 @@ class PostController extends Controller
                         storage::disk('public')->makeDirectory('photos');
                     }
 
-                  
+
 
                     $postImage = Image::make($image)->stream();
                     storage::disk('public')->put('photos/' . $imageName, $postImage);
-                } 
+                }
 
                 $image = new PlaceImage();
 
@@ -247,6 +256,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -260,7 +270,23 @@ class PostController extends Controller
             storage::disk('public')->delete('post/' . $post->image);
         }
 
+      
+
+        $p_image = PlaceImage::where('place_id',$id)->get();
+        foreach ($p_image as $key => $p) {
+        
+            if (storage::disk('public')->exists('photos/' . $p->photos)) {
+                storage::disk('public')->delete('photos/' . $p->photos);
+            }
+            $p_image = PlaceImage::where('id',$p->id)->delete();
+           
+        }
+
         $post->delete();
+       
+
+      
+
         Toastr::success('post successfully deleted', 'success');
         return redirect()->back();
     }

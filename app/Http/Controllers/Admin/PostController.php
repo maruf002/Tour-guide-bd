@@ -196,6 +196,9 @@ class PostController extends Controller
         return view('admin.post.pending',compact('posts'));
     }
 
+
+
+
     public function approval($id){
         $post = place::find($id);
         if($post->approve == false){

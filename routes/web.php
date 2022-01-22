@@ -20,7 +20,8 @@ Route::get('/', 'IndexController@index')->name('index');
 // Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));
 Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));
 Route::get('/search', [IndexController::class, 'search'])->name('search');
-Route::get('place/{slug}','PostController@detailes')->name('place.detailes');
+Route::get('place/{slug}','IndexController@detailes')->name('place.detailes');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

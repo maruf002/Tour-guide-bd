@@ -31,9 +31,25 @@
                     <div class="form-group">
                         <div class="form-line">
                             <input type="text" id="title" class="form-control" name="title" value="{{$place->title}}">
-                            <label class="form-label" >Post Title</label>
+                            <label class="form-label" > Post Title</label>
                         </div>
                     </div>
+
+                    <div class="form-line">
+                        <input type="text" id="title" class="form-control" name="going" value="{{$place->going}}>
+           
+                        <label class="form-label"> যেভাবে যাবেন   </label>
+                    </div><br>
+
+                    <div class="form-line">
+                        <input type="text" id="title" class="form-control" name="eat" value="{{$place->eat}}>
+                        <label class="form-label" > কোথায় খাবেন </label>
+                    </div><br>
+
+                    <div class="form-line">
+                        <input type="text" id="title" class="form-control" name="stay" value="{{$place->stay}}>
+                        <label class="form-label" >কোথায় থাকবেন </label>
+                    </div><br>
 
                     <div class="form-group">
                         <label for="image">Image</label>

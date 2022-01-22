@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\district;
 use App\division;
 use App\place;
+use App\PlaceImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -41,4 +42,16 @@ class IndexController extends Controller
         //    place::where('district_id', $district AND 'approve', 1)->get();
         return view('frontend.place.search_place', compact('place'));
     }
+
+
+    public function detailes($id){
+
+        $place = place::find($id);
+
+       $place_image = PlaceImage::where('place_id',$id)->get();
+
+        return view('frontend.place.detail_place',compact('place','place_image'));
+
+    }
+
 }
