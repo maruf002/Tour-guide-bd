@@ -13,8 +13,9 @@ class IndexController extends Controller
 {
     public function index()
     {
+      $place = place::latest()->take(4)->get();
         $divisions = DB::select('select * from divisions ');
-        return view('index', compact('divisions'));
+        return view('index', compact('divisions','place'));
     }
 
     public function myformAjax($DivisionId)
@@ -48,9 +49,19 @@ class IndexController extends Controller
 
         $place = place::find($id);
 
-       $place_image = PlaceImage::where('place_id',$id)->get();
+       return  $place_image = PlaceImage::where('place_id',$id)->get();
 
         return view('frontend.place.detail_place',compact('place','place_image'));
+
+    }
+
+    public function modal_details(Request $request){
+    $id = $request->id;
+        $place = place::find($request->id);
+        $place_image = PlaceImage::where('place_id',$id)->get();
+
+        return view('frontend.place.modal_view',compact('place','place_image'));
+
 
     }
 

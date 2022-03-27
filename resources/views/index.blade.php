@@ -3,6 +3,7 @@
 @push('css')
 
 <style>
+	
 	/*search box css start here*/
 .search-sec{
     padding: 2rem;
@@ -44,6 +45,26 @@
         background: #1A4668;
     }
 }
+
+.img{
+    border-radius: 15px;
+    margin-bottom:20px;
+}
+
+.t{
+    height: 80px;
+}
+
+.jj{
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
+hr{
+   background-color: rgb(29, 221, 164);
+}
+
+
+
 </style>
 	
 @endpush
@@ -64,16 +85,16 @@
 		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 500px" >
+					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 300px" >
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
+					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 300px">
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
+					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 300px">
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
+					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 300px">
 				</div>
 				<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
 			</div>
@@ -124,6 +145,60 @@
 	
 </div>
 
+<div class="container">
+	<div class="accordion-item mt-5">
+		<h2 class="accordion-header" id="headingOne">
+		  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			<h3><span class="badge bg-secondary">Recently Added  Places</span></h3>
+		  </button>
+		</h2>
+		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+		  <div class="accordion-body">
+		
+			<div class="row">
+				@foreach($place as $key => $pl)
+		
+					 <div class="col-md-4 mt-5">
+						 
+						<div class="card flex-md-row mb-4 shadow-sm h-md-250" style="height:200px">
+		
+				  
+						   <div class="card-body d-flex flex-column align-items-start">
+							  <strong class="d-inline-block mb-2 text-primary">{{$pl->title}}</strong>
+							  <h6 class="mb-0">
+		
+								<span class="badge badge-warning">Author Name: </span> {{$pl->user->name}}
+							   
+								  
+							  </h6>
+		
+							 
+							  <div class="mb-1 text-muted small"> {{$pl->created_at->diffforhumans()}}</div>
+							  <p class="card-text mb-auto">  {{Str::limit(strip_tags($pl->description),15) }} 
+							</p>
+							  {{-- <a class="btn btn-sm" role="button" href="{{route('place.detailes',$pl->id)}}">Continue reading</a> --}}
+							  <button class="btn btn-outline-warning btn-sm" onclick="event.preventDefault(); loadmodal({{$pl->id}})"><h1 class="badge badge-pill badge-info">Click to view</h1></button>
+						   </div>
+						   <img class="crd-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="{{asset('storage/post/'.$pl->image)}}" style="width: 100px; height: 100px;">
+					 
+						
+						</div>
+				
+					 </div>
+		
+				
+					
+			
+				@endforeach
+			</a> 
+			</div>
+		  </div>
+		</div>
+	  </div>
+  
+	
+</div>
+<div id="modal_container"></div>
 @push('js')
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -149,6 +224,25 @@
 			}
 		});
 	});
+
+	function loadmodal(id){
+		// alert('id');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "{{ route('place-modal-details') }}",
+                data: {id:id},
+                dataType: 'html',
+                success: function(data) {
+                    $('#modal_container').html(data);
+                    $('#modal_container .modal ').modal('show');
+                }
+            });
+        }
 </script>
 @endpush
 @endsection
