@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'IndexController@index')->name('index');
+Route::post('loadTimeLine', [IndexControlleR::class, 'live_search'])->name('livesearch');
 Route::post('place-modal-details', 'IndexController@modal_details')->name('place-modal-details');
 // Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));
 Route::get('myform/ajax/{id}',array('as'=>'myform.ajax','uses'=>'indexController@myformAjax'));

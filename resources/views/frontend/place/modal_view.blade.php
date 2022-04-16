@@ -17,7 +17,7 @@
                       
                       <div class="mb-1 text-muted small"> {{$place->created_at->diffforhumans()}}</div>
                       <h5 class="card-title badge badge-pill badge-info">{{$place->title}}</h5>
-                      <p class="card-text overflow-auto">{{strip_tags($place->description)}}</p>
+                      <p class="card-text overflow-auto">{!! $place->description !!}</p>
                  
                     </div>
                   </div>
@@ -26,7 +26,7 @@
                   
                     <div class="card-body overflow-auto">
                       যেভাবে যাবেন 
-                      <p class="card-title t overflow-auto ">{{Str::limit($place->going,200)}}   </p> <hr>
+                      <p class="card-title t overflow-auto ">{{$place->going}}  </p> <hr>
                       কোথায় থাকবেন
                       <p class="card-title t overflow-auto">{{$place->stay}}</p><hr>
                       কোথায় খাবেন 
@@ -57,9 +57,8 @@
                  </div>
         
         </div>
-        <div class="modal_footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal_footer ml-auto mr-auto">
+          <button type="button" class="btn btn-danger badge badge-pill" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

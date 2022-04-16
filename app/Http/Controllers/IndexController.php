@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-      $place = place::latest()->take(4)->get();
+      $place = place::latest()->take(4)->where('approve',1)->get();
         $divisions = DB::select('select * from divisions ');
         return view('index', compact('divisions','place'));
     }
@@ -49,20 +49,24 @@ class IndexController extends Controller
 
         $place = place::find($id);
 
-       return  $place_image = PlaceImage::where('place_id',$id)->get();
+         $place_image = PlaceImage::where('place_id',$id)->get();
 
         return view('frontend.place.detail_place',compact('place','place_image'));
 
     }
 
     public function modal_details(Request $request){
-    $id = $request->id;
+         $id = $request->id;
         $place = place::find($request->id);
         $place_image = PlaceImage::where('place_id',$id)->get();
-
         return view('frontend.place.modal_view',compact('place','place_image'));
 
 
+    }
+
+    public function live_search(Request $request){
+        $posts= place::where('name', 'like', '%' . $request->name. '%')->get();
+        return view('backend.manual_attendance.timeline', compact('attendanceData'));
     }
 
 }

@@ -3,6 +3,10 @@
 @push('css')
 
 <style>
+
+body{
+	/* background-image: url("storage/img/background.png"); */
+}
 	
 	/*search box css start here*/
 .search-sec{
@@ -65,6 +69,58 @@ hr{
 
 
 
+body,html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    /* background: #e74c3c !important; */
+    }
+
+    .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #fbe411;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: rgb(234, 45, 108);
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 350px;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 550px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+    }
+
 </style>
 	
 @endpush
@@ -74,12 +130,20 @@ hr{
 
 <div class="container">
 	<div class="container">
-		<div class="row pt-1 pb-1">
+		<div class="row pt-1 pb-1 mb-4">
 			<div class="col-lg-12">
 			
 			     <h2 class="text-center">See The Unseen Banladesh</h2>
+				 <div class="container h-100 " >
+					<div class="d-flex justify-content-center h-100">
+					  <div class="searchbar">
+						<input class="search_input" id="input" type="text" name="" placeholder="Search By Place Name...">
+						<a href="#" class="search_icon btn btn-info" id="search"><i class="fas fa-search"></i></a>
+					  </div>
+					</div>
+				  </div>
 				{{-- <h6 class="text-center">awesome responsive image slider with a search bar</h6>  --}}
-		</div>
+			</div>
 	</div>
 	<section>
 		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
@@ -118,7 +182,10 @@ hr{
 				<div class="row">
 					<div class="col-lg-8 offset-3">
 						<div class="row">
+						
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
+								
+
 								<select name="Division" class="form-control search-slt" id="exampleFormControlSelect1">
 									<option>বিভাগ বাছাই করুন</option>
 									@foreach ($divisions as $div)
@@ -160,11 +227,11 @@ hr{
 		
 					 <div class="col-md-4 mt-5">
 						 
-						<div class="card flex-md-row mb-4 shadow-sm h-md-250" style="height:200px">
+						<div class="card flex-md-row mb-4 shadow-sm h-md-250 border border-warning" style="height:200px">
 		
 				  
 						   <div class="card-body d-flex flex-column align-items-start">
-							  <strong class="d-inline-block mb-2 text-primary">{{$pl->title}}</strong>
+							  <strong class="d-inline-block mb-2 text-primary">{{Str::limit($pl->title,18)}}</strong>
 							  <h6 class="mb-0">
 		
 								<span class="badge badge-warning">Author Name: </span> {{$pl->user->name}}
@@ -179,7 +246,7 @@ hr{
 							  {{-- <a class="btn btn-sm" role="button" href="{{route('place.detailes',$pl->id)}}">Continue reading</a> --}}
 							  <button class="btn btn-outline-warning btn-sm" onclick="event.preventDefault(); loadmodal({{$pl->id}})"><h1 class="badge badge-pill badge-info">Click to view</h1></button>
 						   </div>
-						   <img class="crd-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="{{asset('storage/post/'.$pl->image)}}" style="width: 100px; height: 100px;">
+						   <img class="crd-img-right flex-auto d-none d-lg-block rounded-circle" alt="Thumbnail [200x250]" src="{{asset('storage/post/'.$pl->image)}}" style="width: 100px; height: 100px; padding:5px;">
 					 
 						
 						</div>
@@ -243,6 +310,30 @@ hr{
                 }
             });
         }
+
+		$("#search").click(function(){
+      		 alert("The paragraph was clicked.");
+			   	
+
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+			$.ajax({
+				type: "POST",
+				url: '{{ route('livesearch') }}',
+				dataType: "html",
+				success: function(html) {
+
+					$('#timelineDiv').empty().html(html);
+				}
+			});
+
+	});
+
+
+
 </script>
 @endpush
 @endsection

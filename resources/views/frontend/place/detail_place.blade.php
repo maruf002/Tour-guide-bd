@@ -49,28 +49,28 @@ hr{
         <div class="card " style="width: 48rem;">
          
             <img class="card-img-top img-thumbnail" src="{{asset('storage/post/'.$place->image)}}" alt="Card image cap">
-            <div class="card-body">
+            <div class="card-body overflow-auto" style="height:400px">
               {{-- <h5 class="card-title">   <span class="badge badge-warning">Author Name: </span> {{$place->user->name}}</h5> --}}
               
               {{-- <div class="mb-1 text-muted small"> {{$place->created_at->diffforhumans()}}</div> --}}
-              <h5 class="card-title">{{$place->title}}</h5>
-              <p class="card-text">{{strip_tags($place->description)}}</p>
+              <h5 class="card-title badge badge-warning badge-pill">{{$place->title}}</h5>
+              <p class="card-text">{!! $place->description !!}</p>
          
             </div>
           </div>
 
-          <div class="card mt-5 " style="width: 38rem;">
+          <div class="card mt-5 " style="width: 48rem;">
           
-            <div class="card-body">
-              যেভাবে যাবেন 
-              <p class="card-title t ">{{$place->going}}   </p> <hr>
-              কোথায় থাকবেন
-              <p class="card-title t">{{$place->stay}}</p><hr>
-              কোথায় খাবেন 
-              <p class="card-title t">  {{$place->eat}}</p><hr>
-             
-         
-            </div>
+            <div class="card-body overflow-auto">
+                যেভাবে যাবেন 
+                <p class="card-title t overflow-auto ">{!! $place->going !!}  </p> <hr>
+                কোথায় থাকবেন
+                <p class="card-title t overflow-auto">{!! $place->stay !!}</p><hr>
+                কোথায় খাবেন 
+                <p class="card-title t overflow-auto"> {!! $place->eat !!} </p><hr>
+               
+           
+              </div>
           </div>
           
           
@@ -88,9 +88,7 @@ hr{
         <img class="img-fluid img" alt="Thumbnail [200x250]" src="{{asset('storage/photos/'.$p->photos)}}" style="width: 400px; height: 300px;">
         @endforeach
             </div>
-
-        
-          
+            
          </div>
 
          
