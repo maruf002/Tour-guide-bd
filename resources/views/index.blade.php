@@ -137,28 +137,33 @@ body,html{
 				 <div class="container h-100 " >
 					<div class="d-flex justify-content-center h-100">
 					  <div class="searchbar">
-						<input class="search_input" id="input" type="text" name="" placeholder="Search By Place Name...">
+						<input class="search_input" id="input" type="text" name="name" placeholder="Search By Place Name...">
 						<a href="#" class="search_icon btn btn-info" id="search"><i class="fas fa-search"></i></a>
+						
+						{{-- <a hidden href="#" class="search_icon btn btn-info" id="search"><i class="fas fa-search"></i></a> --}}
+						
 					  </div>
 					</div>
 				  </div>
-				{{-- <h6 class="text-center">awesome responsive image slider with a search bar</h6>  --}}
+				
 			</div>
 	</div>
+
+	<div id="timelineDiv"></div>
 	<section>
 		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 300px" >
+					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 400px" >
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 300px">
+					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 400px">
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 300px">
+					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 400px">
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 300px">
+					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 400px">
 				</div>
 				<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
 			</div>
@@ -178,7 +183,7 @@ body,html{
 	<section class="search-sec">
 	
 		<div class="container">
-			<form action="{{route('search')}}" method="get" novalidate="novalidate">
+			<form action="{{route('search')}}"  method="get" novalidate="novalidate">
 				<div class="row">
 					<div class="col-lg-8 offset-3">
 						<div class="row">
@@ -312,9 +317,8 @@ body,html{
         }
 
 		$("#search").click(function(){
-      		 alert("The paragraph was clicked.");
-			   	
-
+			var name = $("#input").val();
+			
 			$.ajaxSetup({
 				headers: {
 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -323,7 +327,8 @@ body,html{
 			$.ajax({
 				type: "POST",
 				url: '{{ route('livesearch') }}',
-				dataType: "html",
+				data:{'search':name},
+				// dataType: "html",
 				success: function(html) {
 
 					$('#timelineDiv').empty().html(html);
