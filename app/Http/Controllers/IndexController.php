@@ -66,8 +66,10 @@ class IndexController extends Controller
 
     public function live_search(Request $request){
 
-   
+
+      
         $posts= place::where('title', 'like', '%' . $request->search. '%')->get();
+     
         
         return view('frontend.place.live_search', compact('posts'));
     }

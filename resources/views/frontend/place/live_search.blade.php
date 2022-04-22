@@ -1,7 +1,7 @@
 @foreach($posts as $key => $pl)
 
 <div class="col-md-12 mt-5 search_live">
-   <button>tt</button>
+
    <div class="card flex-md-row mb-4 shadow-sm h-md-250" style="height: 290px">
 
 

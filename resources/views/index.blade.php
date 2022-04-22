@@ -143,6 +143,7 @@ body,html{
 						{{-- <a hidden href="#" class="search_icon btn btn-info" id="search"><i class="fas fa-search"></i></a> --}}
 						
 					  </div>
+					  <div id="clear" style="margin-top: 35px"></div>
 					</div>
 				  </div>
 				
@@ -330,12 +331,25 @@ body,html{
 				data:{'search':name},
 				// dataType: "html",
 				success: function(html) {
-
+					$("#clear").empty();
 					$('#timelineDiv').empty().html(html);
+					$('#clear').append('<a href="#" class="search_icon btn btn-danger" id="search_clear"><i class="fas fa-x"></i></a>');
+					$("#search_clear").click(function(){
+						$('.search_live').hide();
+						$('#search_clear').hide();
+					});
+						
 				}
 			});
 
 	});
+
+	// $("#search_clear").click(function(){
+			
+	// 	console.log('h');
+		
+
+	// });
 
 
 
