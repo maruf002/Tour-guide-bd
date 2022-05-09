@@ -74,7 +74,7 @@ body,html{
     width: 100%;
     margin: 0;
     padding: 0;
-    /* background: #e74c3c !important; */
+    /* background: #cbf5f2f5 !important; */
     }
 
     .searchbar{
@@ -120,6 +120,32 @@ body,html{
     color:white;
     text-decoration:none;
     }
+
+	.aboutus-title {
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: 32px;
+    margin: 0 0 19px;
+    padding: 0 0 8px;
+    position: relative;
+    text-transform: uppercase;
+    color: #000;
+}
+.aboutus-title::after {
+    background: #fdb801 none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 54px;
+}
+.aboutus-text {
+    color: #606060;
+    font-size: 10px;
+    line-height: 22px;
+    /* margin: 0 0 35px; */
+}
 
 </style>
 	
@@ -257,10 +283,7 @@ body,html{
 						
 						</div>
 				
-					 </div>
-		
-				
-					
+					 </div>	
 			
 				@endforeach
 			</a> 
@@ -271,6 +294,48 @@ body,html{
   
 	
 </div>
+
+<div class="container">
+	<div class="about-us mt-3">
+		<h2 class="aboutus-title">About Us</h2>
+	</div>
+	<div class="card-deck">
+		<div class="card">
+		  <img src="{{asset('storage/profile/' . 'pranto.jpeg')}}" class="card-img-top" alt="..." style="height: 250px;width:400px">
+		  <div class="card-body" style="margin-left:60px">
+			<h5 class="card-title">Adnan Rahaman Pranto</h5>
+			<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">prantorahaman99@gmail.com</p>
+		  </div>
+		  <div class="card-footer">
+			<small class="text-muted" style="margin-left: 60px">Department of CSE</small>
+		  </div>
+		</div>
+		<div class="card">
+		  <img src="{{asset('storage/profile/' . 'tahsan.jpeg')}}" class="card-img-top" style="height: 250px;width:400px" alt="...">
+		  
+		    <div class="card-body" style="margin-left: 60px">
+				<h5 class="card-title">Emon Ahmed</h5>
+				<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">emon15-2175@diu.edu.bd</p>
+			  </div>
+
+			  <div class="card-footer">
+				<small class="text-muted" style="margin-left: 60px">Department of CSE</small>
+			  </div>
+	
+		</div>
+		<div class="card">
+		  <img src="{{asset('storage/profile/' . 'emon.jpeg')}}" class="card-img-top" style="height: 250px;width:400px" alt="...">
+		  <div class="card-body" style="margin-left: 60px">
+			<h5 class="card-title">Emon Ahmed</h5>
+			<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">emon15-2175@diu.edu.bd</p>
+		  </div>
+		  <div class="card-footer">
+			<small class="text-muted" style="margin-left: 60px">Department of CSE</small>
+		  </div>
+		</div>
+	  </div>
+</div>
+
 <div id="modal_container"></div>
 @push('js')
 <script type="text/javascript">
