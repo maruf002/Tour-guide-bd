@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-      $place = place::latest()->take(4)->where('approve',1)->get();
+      $place = place::latest()->take(12)->where('approve',1)->get();
         $divisions = DB::select('select * from divisions ');
         return view('index', compact('divisions','place'));
     }
@@ -68,7 +68,7 @@ class IndexController extends Controller
 
 
       
-        $posts= place::where('title', 'like', '%' . $request->search. '%')->get();
+        $posts= place::where('title', 'like', '%' . $request->search. '%')->where('approve',1)->get();
      
         
         return view('frontend.place.live_search', compact('posts'));
