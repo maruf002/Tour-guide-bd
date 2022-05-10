@@ -147,6 +147,12 @@ body,html{
     /* margin: 0 0 35px; */
 }
 
+.card-footer{
+	width: 305px;
+	margin-left: 50px;
+
+}
+
 </style>
 	
 @endpush
@@ -181,16 +187,16 @@ body,html{
 		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 400px" >
+					<img src="{{asset('storage/sliders/' . 'one.jpg')}}" class="d-block w-100" alt="..."style="height: 500px" >
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 400px">
+					<img src="{{asset('storage/sliders/' . 'two.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 400px">
+					<img src="{{asset('storage/sliders/' . 'three.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
 				</div>
 				<div class="carousel-item">
-					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 400px">
+					<img src="{{asset('storage/sliders/' . 'four.jpg')}}" class="d-block w-100" alt="..." style="height: 500px">
 				</div>
 				<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
 			</div>
@@ -301,7 +307,7 @@ body,html{
 	</div>
 	<div class="card-deck">
 		<div class="card">
-		  <img src="{{asset('storage/profile/' . 'pranto.jpeg')}}" class="card-img-top" alt="..." style="height: 250px;width:400px">
+		  <img src="{{asset('storage/profile/' . 'pranto.jpeg')}}" class="card-img-top" alt="..." style="height: 250px;width:300px;margin-left:50px">
 		  <div class="card-body" style="margin-left:60px">
 			<h5 class="card-title">Adnan Rahaman Pranto</h5>
 			<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">prantorahaman99@gmail.com</p>
@@ -311,7 +317,7 @@ body,html{
 		  </div>
 		</div>
 		<div class="card">
-		  <img src="{{asset('storage/profile/' . 'tahsan.jpeg')}}" class="card-img-top" style="height: 250px;width:400px" alt="...">
+		  <img src="{{asset('storage/profile/' . 'tahsan.jpeg')}}" class="card-img-top" style="height: 250px;width:300px;margin-left:50px" alt="...">
 		  
 		    <div class="card-body" style="margin-left: 60px">
 				<h5 class="card-title">Emon Ahmed</h5>
@@ -324,7 +330,7 @@ body,html{
 	
 		</div>
 		<div class="card">
-		  <img src="{{asset('storage/profile/' . 'emon.jpeg')}}" class="card-img-top" style="height: 250px;width:400px" alt="...">
+		  <img src="{{asset('storage/profile/' . 'emon.jpeg')}}" class="card-img-top" style="height: 250px;width:300px;margin-left:50px" alt="...">
 		  <div class="card-body" style="margin-left: 60px">
 			<h5 class="card-title">Emon Ahmed</h5>
 			<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">emon15-2175@diu.edu.bd</p>
