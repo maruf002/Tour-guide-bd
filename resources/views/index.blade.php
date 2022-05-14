@@ -169,7 +169,7 @@ body,html{
 				 <div class="container h-100 " >
 					<div class="d-flex justify-content-center h-100">
 					  <div class="searchbar">
-						<input class="search_input" id="input" type="text" name="name" placeholder="Search By Place Name...">
+						<input class="search_input" id="input" type="text" name="name" placeholder="দর্শনীয় স্থানের নাম অনুসন্ধান করুন...">
 						<a href="#" class="search_icon btn btn-info" id="search"><i class="fas fa-search"></i></a>
 						
 						{{-- <a hidden href="#" class="search_icon btn btn-info" id="search"><i class="fas fa-search"></i></a> --}}
@@ -239,7 +239,7 @@ body,html{
 								</select>
 							</div>
 							<div class="col-lg-3 col-md-3 col-sm-12 p-0">
-								<button type="submit" class="btn btn-danger wrn-btn">Search</button>
+								<button type="submit" class="btn btn-danger wrn-btn">অনুসন্ধান</button>
 							</div>
 						</div>
 					</div>
@@ -254,7 +254,7 @@ body,html{
 	<div class="accordion-item mt-5">
 		<h2 class="accordion-header" id="headingOne">
 		  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-			<h3><span class="badge bg-secondary">Recently Added  Places</span></h3>
+			<h3><span class="badge bg-secondary"> সর্বশেষ সংযোজন</span></h3>
 		  </button>
 		</h2>
 		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -282,7 +282,7 @@ body,html{
 							  <p class="card-text mb-auto">  {{Str::limit(strip_tags($pl->description),15) }} 
 							</p>
 							  {{-- <a class="btn btn-sm" role="button" href="{{route('place.detailes',$pl->id)}}">Continue reading</a> --}}
-							  <button class="btn btn-outline-warning btn-sm" onclick="event.preventDefault(); loadmodal({{$pl->id}})"><h1 class="badge badge-pill badge-info">Click to view</h1></button>
+							  <button class="btn btn-outline-warning btn-sm" onclick="event.preventDefault(); loadmodal({{$pl->id}})"><h1 class="badge badge-pill badge-info"> বিস্তারিত জানুন </h1></button>
 						   </div>
 						   <img class="crd-img-right flex-auto d-none d-lg-block rounded-circle" alt="Thumbnail [200x250]" src="{{asset('storage/post/'.$pl->image)}}" style="width: 100px; height: 100px; padding:5px;">
 					 
@@ -303,14 +303,14 @@ body,html{
 
 <div class="container">
 	<div class="about-us mt-3">
-		<h2 class="aboutus-title">About Us</h2>
+		<h2 class="aboutus-title">আমাদের সম্পর্কে জানুন</h2>
 	</div>
 	<div class="card-deck">
 		<div class="card">
 		  <img src="{{asset('storage/profile/' . 'pranto.jpeg')}}" class="card-img-top" alt="..." style="height: 250px;width:300px;margin-left:50px">
 		  <div class="card-body" style="margin-left:60px">
-			<h5 class="card-title">Adnan Rahaman Pranto</h5>
-			<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">prantorahaman99@gmail.com</p>
+			<h5 class="card-title">আদনান রহমান প্রান্ত</h5>
+			<p class="card-text badge badge-success badge-pill" style="font-size: 12px;font-weight:900;color:white">prantorahaman99@gmail.com</p>
 		  </div>
 		  <div class="card-footer">
 			<small class="text-muted" style="margin-left: 60px">Department of CSE</small>
@@ -320,8 +320,8 @@ body,html{
 		  <img src="{{asset('storage/profile/' . 'tahsan.jpeg')}}" class="card-img-top" style="height: 250px;width:300px;margin-left:50px" alt="...">
 		  
 		    <div class="card-body" style="margin-left: 60px">
-				<h5 class="card-title">Emon Ahmed</h5>
-				<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">emon15-2175@diu.edu.bd</p>
+				<h5 class="card-title">তাহসান হোসেন</h5>
+				<p class="card-text badge badge-success badge-pill" style="font-size: 12px;font-weight:900;color:white">tahsan15-2175@diu.edu.bd</p>
 			  </div>
 
 			  <div class="card-footer">
@@ -332,8 +332,8 @@ body,html{
 		<div class="card">
 		  <img src="{{asset('storage/profile/' . 'emon.jpeg')}}" class="card-img-top" style="height: 250px;width:300px;margin-left:50px" alt="...">
 		  <div class="card-body" style="margin-left: 60px">
-			<h5 class="card-title">Emon Ahmed</h5>
-			<p class="card-text badge badge-warning badge-pill" style="font-size: 12px;font-weight:900;color:black">emon15-2175@diu.edu.bd</p>
+			<h5 class="card-title">ইমন মিনা</h5>
+			<p class="card-text badge badge-success badge-pill" style="font-size: 12px;font-weight:900;color:white">emon15-2175@diu.edu.bd</p>
 		  </div>
 		  <div class="card-footer">
 			<small class="text-muted" style="margin-left: 60px">Department of CSE</small>
